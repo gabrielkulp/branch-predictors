@@ -18,7 +18,7 @@ case $c in
 	x) EXPORT=true ;;
 	a) ARCH="$OPTARG" ;;
 	t) BIN_TYPE="$OPTARG" ;;
-	u) USER="$OPTARG" ;;
+	u) OWNER="$OPTARG" ;;
 	*) usage ;;
 esac; done
 
@@ -35,7 +35,7 @@ if [ -n "$EXPORT" ]; then
 	IMAGE=$(docker build -q --build-arg "ARCH=$ARCH" - < Dockerfile-release)
 	ID=$(docker create "$IMAGE")
 	echo "Exporting executable to smaller image"
-	docker export "$ID" | docker import - "gem5:$ARCH" -c 'CMD [ "gem5", "--help" ]'
+	docker export "$ID" | docker import - "gem5:$ARCH" -c 'WORKDIR /opt' -c 'CMD [ "gem5", "--help" ]'
 	echo "Tagged gem5:$ARCH"
 	echo "Removing temporary container and image"
 	docker rm "$ID"
@@ -43,9 +43,9 @@ if [ -n "$EXPORT" ]; then
 fi
 
 # only do the upload if -u is provided
-if [ -n "$USER" ]; then
-	docker tag gem5:"$ARCH" "$USER/gem5:$ARCH"
-	docker push "$USER/gem5:$ARCH"
+if [ -n "$OWNER" ]; then
+	docker tag gem5:"$ARCH" "$OWNER/gem5:$ARCH"
+	docker push "$OWNER/gem5:$ARCH"
 fi
 
 echo "Done!"

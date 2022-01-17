@@ -40,4 +40,5 @@ RUN scons $BUILD_TARGET -j `nproc`
 RUN cp $BUILD_TARGET /usr/local/bin/gem5
 
 # Set built binary as the default command for this image
+WORKDIR /opt
 CMD [ "gem5", "--help" ]
