@@ -1,0 +1,8 @@
+FROM gabrielkulp/gem5-build:RISCV
+
+RUN rm -rf /usr/local/src \
+ && apt install -y libprotobuf23 libgoogle-perftools4 libpython3.9 \
+ && apt purge -y build-essential git m4 scons zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev \
+ && apt autoremove -y
+
+CMD [ "gem5", "--help" ]

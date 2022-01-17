@@ -6,7 +6,7 @@ RUN apt update \
     zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev \
     libgoogle-perftools-dev python-dev-is-python3 python3-pydot
 
-# Get the code
+# Get the code (v21.2.0.0)
 ARG SRC_DIR=/usr/local/src/gem5
 RUN git clone https://gem5.googlesource.com/public/gem5 $SRC_DIR \
  && cd $SRC_DIR \
@@ -40,4 +40,4 @@ RUN scons $BUILD_TARGET -j `nproc`
 RUN cp $BUILD_TARGET /usr/local/bin/gem5
 
 # Set built binary as the default command for this image
-CMD [ "/usr/local/bin/gem5", "--help" ]
+CMD [ "gem5", "--help" ]
