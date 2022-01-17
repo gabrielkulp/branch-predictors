@@ -21,9 +21,22 @@ If you want to use a different architecture, run `./build.sh -a ARM` or `./build
 Then use that architecture after the colon in the `docker run` command above.
 Building for different architectures *will not* overwrite each other.
 
+## How to run
+
+After building, use `./gem5.sh` as though it were `gem5`, except that **the first argument must be the architecture**. For example, you can run
+
+```
+./gem5.sh RISCV configs/learning_gem5/part1/simple.py
+```
+
+Results and statistics from a run are stored in `./m5out` in your current directory.
+
+The current directory when you run `./gem5.sh` is mounted into `/opt` inside the container, so you must use relative paths for files.
+(Specify the config file with a path that does not start with `/`.)
+
 ## How to contribute
 
-The contents of the `gem5` directory is copied into the gem5 repository before starting the second incremental build.
+The contents of the `gem5` directory is copied into the gem5 repository inside the container before starting the second incremental build.
 This means that any files or directories you add or change inside there will be additions or changes to the full gem5 source code.
 
 After making a change, just run `./build.sh` again and the image will rebuild to reflect that change.
