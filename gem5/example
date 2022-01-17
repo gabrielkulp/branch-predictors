@@ -1,0 +1,3 @@
+This file will be copied into the root of the gem5 repo before a build.
+Anything you put in this directory will be copied into the gem5 repository
+(including subdirectories) to replace or add to the existing files.
