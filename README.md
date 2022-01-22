@@ -32,7 +32,7 @@ Results and statistics from a run are stored in `./m5out` in your current direct
 The current directory when you run `./gem5.sh` is mounted into `/opt` inside the container, so you must use relative paths for files.
 (Specify the config file with a path that does not start with `/`.)
 
-This repo contains `tests` and `configs` directories that were originally copied from [gem5 v20.2.0.0](https://gem5.googlesource.com/public/gem5/+/refs/tags/v21.2.0.0/).
+This repo contains `tests` and `configs` directories that were originally copied from [gem5 v21.2.0.0](https://gem5.googlesource.com/public/gem5/+/refs/tags/v21.2.0.0/).
 They are required to run the above example command.
 
 ## How to contribute
