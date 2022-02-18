@@ -1,6 +1,9 @@
 # Proposal: Branch Prediction Simulation Using gem5
 
-CS/ECE 570, "Group 1". January 20, 2022.  
+1. **Proposal**
+2. [Mid-term progress report](progress.html)
+
+CS/ECE 570. January 20, 2022.  
 Adit Agarwal, Gabriel Kulp, Vaibhavi Kavathekar, Vlad Vesely.
 
 
