@@ -60,33 +60,6 @@ void blocked_matmul(myfloat * restrict A, myfloat * restrict B, myfloat * restri
     }
 }
 
-uint64_t read_tsc(void) {
-#ifdef __i386__
-    uint32_t hi, lo;
-#else
-    uint64_t hi, lo;
-#endif
-    /* 
-     * Embed the assembly instruction 'rdtsc', which should not be relocated (`volatile').
-     *  The instruction will modify r_a_x and r_d_x, which the compiler should map to
-     * lo and hi, respectively.
-     * 
-     * The format for GCC-style inline assembly generally is:
-     * __asm__ ( ASSEMBLY CODE : OUTPUTS : INPUTS : OTHER THINGS CHANGED )
-     *
-     * Note that if you do not (correctly) specify the side effects of an assembly operation, the
-     * compiler may assume that other registers and memory are not affected. This can easily
-     * lead to cases where your program will produce difficult-to-debug wrong answers when
-     * optimizations are enabled.
-     */
-    __asm__ volatile ( "rdtsc" : "=a"(lo), "=d"(hi));
-#ifdef __i386__
-    return lo | ((uint64_t) hi << 32);
-#else
-    return lo | (hi << 32);
-#endif
-}
-
 #define SIZE 84
 
 static myfloat A[SIZE * SIZE];
@@ -99,9 +72,7 @@ int main(void) {
     random_matrix(B, SIZE, SIZE);
     random_matrix(C, SIZE, SIZE);
     for (int i = 0; i < 4; ++i) {
-        long start = read_tsc();
         blocked_matmul(A, B, C, SIZE, SIZE, SIZE);
-        long end = read_tsc();
-        printf("Iteration %d: %ld cycles\n", i, end - start);
+        printf("Finished iteration %d\n", i);
     }
 }
