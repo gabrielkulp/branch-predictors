@@ -2,6 +2,7 @@
 
 1. **Proposal**
 2. [Mid-term progress report](progress.html)
+3. [Final report](final.html)
 
 CS/ECE 570. January 20, 2022.  
 Adit Agarwal, Gabriel Kulp, Vaibhavi Kavathekar, Vlad Vesely.
